@@ -7,13 +7,25 @@
 # Push the solution in your repo
 
 
+user_input=('rock','paper','scissors')
+computer_input=('rock', 'paper','scissors')
 def rock_paper_scissors(user_input, computer_input):
-    if user_input is 'rock' and computer_input is 'paper':
-        return 'computer wins'
-
-
-
-
+	if user_input == computer_input:
+		return 'tied game'
+	elif user_input is 'rock' and computer_input is 'paper':
+		return 'computer wins'
+	elif user_input is 'rock' and computer_input is 'scissors':
+		return 'you win'
+	else: 
+		if user_input is 'scissor' and computer_input is 'paper':
+			return 'you win'
+		elif user_input is 'scissor' and computer_input is 'rock':
+			return 'computer wins'
+		else: 
+			if user_input is 'paper' and computer_input is 'paper':
+				return 'computer wins'
+			elif user_input is 'paper' and computer_input is 'rock':
+				return 'you win'
 
 
 
