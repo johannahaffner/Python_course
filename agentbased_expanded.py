@@ -1,4 +1,6 @@
 import numpy as np
+import matplotlib
+matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 
 
@@ -37,28 +39,37 @@ class Model:
         if visualize:
             fig = plt.figure(1, figsize=(12, 12))  # create figure with figure size
             ax = plt.subplot()  # create subplot to be able to change plot without changing figure object
-            ax.set_xlim(0, 200)  # set limits of plot area
-            ax.set_ylim(0, 200)  
-            plt.show(block=False)  # enables changing figure object while opened  
+            # ax.set_xlim(0, 200)  # set limits of plot area
+            # ax.set_ylim(0, 200)  
+            #plt.show(block=False)  # enables changing figure object while opened  
         
         for t in range(time_steps):
             self.update_timestep()
-            if visualize:
-                ax.clear()  # clear the drawing/plotting area
-                ax.set_title('Time: {} sec'.format(t))  # setting the figure title
-                ax.set_xlim(0, 200)
-                ax.set_ylim(0, 200)
-                for agent in self.agents:
-                    ax.scatter(agent.coordinate[0], agent.coordinate[1], color='k')  # plotting current positions
+        #     if visualize:
+        #         ax.clear()  # clear the drawing/plotting area
+        #         ax.set_title('Time: {} sec'.format(t))  # setting the figure title
+        #         ax.set_xlim(0, 200)
+        #         ax.set_ylim(0, 200)
+        #         for agent in self.agents:
+        #             ax.scatter(agent.coordinate[0], agent.coordinate[1], color='r')  # plotting current positions
             
-                    # getting last positions
-                    x_hist = [pos[0] for pos in agent.history]
-                    y_hist = [pos[1] for pos in agent.history]
+        #             # getting last positions
+        #             x_hist = [pos[0] for pos in agent.history]
+        #             y_hist = [pos[1] for pos in agent.history]
             
-                    ax.scatter(x_hist[-7:-1], y_hist[-7:-1], alpha=0.2, color='k')  # plot last 7 timepoints transparantly
-                fig.canvas.draw()  # draw plot
+        #             ax.scatter(x_hist[-7:-1], y_hist[-7:-1], alpha=0.2, color='k')  # plot last 7 timepoints transparantly
+        #         fig.canvas.draw()  # draw plot
+        Agent1=my_model.agents[0]
+        history = Agent1.history
+        X_pos = []
+        Y_pos = []
+        for tp in range(len(history)):
+            X_pos.append(history[tp][0])
+            Y_pos.append(history[tp][1])
+        ax.scatter(X_pos,Y_pos, alpha=0.3)
+        plt.show()
 
 
 if __name__ == "__main__":
     my_model = Model(N=10)
-    my_model.simulate(time_steps=50, visualize=True)
+    my_model.simulate(time_steps=10000, visualize=True)
